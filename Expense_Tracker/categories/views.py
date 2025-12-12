@@ -9,6 +9,10 @@ class CategoryListCreateView(generics.ListCreateAPIView):
     queryset= Category.objects.all()
     serializer_class=CategorySerializer
 
+    def perform_create(self, serializer):
+        # Automatically assign the logged-in user to the category
+        serializer.save(user=self.request.user)
+
 
 class CategoryRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset= Category.objects.all()
