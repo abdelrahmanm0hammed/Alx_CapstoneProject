@@ -10,11 +10,15 @@ class ExpenseListCreatView(generics.ListCreateAPIView):
     serializer_class = ExpenseSerializer
     permission_classes=[IsAuthenticatedOrReadOnly]
 
+    
+
 
 class ExpenseRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset= Expense.objects.all()
     serializer_class = ExpenseSerializer
     permission_classes=[IsAuthenticatedOrReadOnly]
+
+
 
 
 
