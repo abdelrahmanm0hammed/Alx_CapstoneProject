@@ -8,8 +8,6 @@ class ExpenseSerializer(serializers.ModelSerializer):
         slug_field='name',
         queryset=Category.objects.all()
     )
-
-
     class Meta:
         model = Expense
         fields = "__all__"
