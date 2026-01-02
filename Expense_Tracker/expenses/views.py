@@ -6,17 +6,21 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 
 class ExpenseListCreatView(generics.ListCreateAPIView):
-    queryset= Expense.objects.all()
     serializer_class = ExpenseSerializer
     permission_classes=[IsAuthenticatedOrReadOnly]
 
-    
+    def perform_create(self, serilizer):
+        serilizer.save(user=self.request.user)
+    def get_queryset(self):
+        return Expense.objects.filter(user=self.request.user).order_by("-create_at")
 
 
 class ExpenseRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-    queryset= Expense.objects.all()
     serializer_class = ExpenseSerializer
     permission_classes=[IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        return Expense.objects.filter(user=self.request.user)
 
 
 
