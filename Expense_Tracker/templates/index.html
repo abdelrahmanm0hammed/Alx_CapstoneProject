@@ -12,6 +12,12 @@
         h1 {
             color: #333;
         }
+        .user-info {
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #eef;
+            border-radius: 5px;
+        }
         ul {
             list-style: none;
             padding: 0;
@@ -34,32 +40,45 @@
     </style>
 </head>
 <body>
+{% csrf_token %}
     <h1>Expense Tracker API Dashboard</h1>
+
+    <!-- 🔐 Auth status -->
+    <div class="user-info">
+        {% if user.is_authenticated %}
+            <p>
+                👋 Welcome,
+                <strong>{{ user.username }}</strong>
+            </p>
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <p>🔒 You are not logged in</p>
+            <a href="{% url 'login' %}">Login</a> |
+            <a href="{% url 'register' %}">Register</a>
+        {% endif %}
+    </div>
+
     <ul>
         <li>
-            <a href="http://127.0.0.1:8000/admin/">Admin</a>
+            <a href="/admin/">Admin</a>
             <div class="url">http://127.0.0.1:8000/admin/</div>
         </li>
+
+        {% if user.is_authenticated %}
         <li>
-            <a href="http://127.0.0.1:8000/accounts/register/">Register</a>
-            <div class="url">http://127.0.0.1:8000/accounts/register/</div>
-        </li>
-        <li>
-            <a href="http://127.0.0.1:8000/accounts/login/">Login</a>
-            <div class="url">http://127.0.0.1:8000/accounts/login/</div>
-        </li>
-        <li>
-            <a href="http://127.0.0.1:8000/accounts/logout/">Logout</a>
-            <div class="url">http://127.0.0.1:8000/accounts/logout/</div>
-        </li>
-        <li>
-            <a href="http://127.0.0.1:8000/categories/">Categories</a>
+            <a href="/categories/">Categories</a>
             <div class="url">http://127.0.0.1:8000/categories/</div>
         </li>
         <li>
-            <a href="http://127.0.0.1:8000/expenses/">Expenses</a>
+            <a href="/expenses/">Expenses</a>
             <div class="url">http://127.0.0.1:8000/expenses/</div>
         </li>
+        {% else %}
+        <li>
+            <em>Login to access Categories and Expenses</em>
+        </li>
+        {% endif %}
     </ul>
+
 </body>
 </html>
