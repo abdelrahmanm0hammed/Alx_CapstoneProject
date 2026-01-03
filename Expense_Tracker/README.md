@@ -94,16 +94,9 @@ Password : 123456abdo
 Confirm Password : 123456abdo
 Email : myemail@gmail.com
 
-another user 
 
-Firstname : john
-Secondname : micheal
-Username : abood1   
-Password : 123456abdo
-Confirm Password : 123456abdo
-Email : myemail1@gmail.com
 
-login the first user 
+login  user 
 visit the page 
 http://127.0.0.1:8000/accounts/login/
 username :abood
@@ -131,6 +124,16 @@ visit the page
 http://127.0.0.1:8000/accounts/logout/
 
 ## Another example 
+
+register user
+http://127.0.0.1:8000/accounts/register/
+
+Firstname : john
+Secondname : micheal
+Username : abood1   
+Password : 123456abdo
+Confirm Password : 123456abdo
+Email : myemail1@gmail.com
 
 login the second user 
 visit the page 
