@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'categories',
     'accounts',
     'rest_framework',
+    'incomes',
 
 ]
 
