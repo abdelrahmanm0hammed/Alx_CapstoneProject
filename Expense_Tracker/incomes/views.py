@@ -12,7 +12,7 @@ class IncomeListCreateView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(user= self.request.user)
     def get_queryset(self):
-        return Income.objects.filter(user=self.request.user).order_by("-create_at")
+        return Income.objects.filter(user=self.request.user).order_by("-created_at")
 
 class IncomeRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = IncomeSerializer
