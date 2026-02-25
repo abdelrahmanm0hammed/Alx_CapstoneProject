@@ -3,11 +3,18 @@ from .models import Income
 from .serializers import IncomeSerializer
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import OrderingFilter, SearchFilter
 
 class IncomeListCreateView(generics.ListCreateAPIView):
     serializer_class = IncomeSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    
+    filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
+
+    filterset_fields = ["category", "date"]
+    ordering_fields = ["amount", "date"]
+    search_fields = ["description"]
 
     def perform_create(self, serializer):
         serializer.save(user= self.request.user)

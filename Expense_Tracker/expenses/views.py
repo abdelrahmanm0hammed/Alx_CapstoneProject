@@ -3,11 +3,20 @@ from .models import Expense
 from .serializers import ExpenseSerializer
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import OrderingFilter, SearchFilter
+
 
 
 class ExpenseListCreatView(generics.ListCreateAPIView):
     serializer_class = ExpenseSerializer
     permission_classes=[IsAuthenticatedOrReadOnly]
+
+    filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
+
+    filterset_fields = ["category", "date"]
+    ordering_fields = ["amount", "date"]
+    search_fields = ["description"]
 
     def perform_create(self, serilizer):
         serilizer.save(user=self.request.user)
