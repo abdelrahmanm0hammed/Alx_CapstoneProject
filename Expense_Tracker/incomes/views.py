@@ -12,7 +12,7 @@ class IncomeListCreateView(generics.ListCreateAPIView):
     
     filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
 
-    filterset_fields = ["category", "date"]
+    filterset_fields = ["date"]
     ordering_fields = ["amount", "date"]
     search_fields = ["description"]
 
