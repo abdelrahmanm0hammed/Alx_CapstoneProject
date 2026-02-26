@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'incomes',
     'reports',
-    'django-filters',
+    'django_filters',
 
 ]
 
