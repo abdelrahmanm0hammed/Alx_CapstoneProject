@@ -5,6 +5,7 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter, SearchFilter
+from .filters import IncomeFilter
 
 class IncomeListCreateView(generics.ListCreateAPIView):
     serializer_class = IncomeSerializer
@@ -12,7 +13,7 @@ class IncomeListCreateView(generics.ListCreateAPIView):
     
     filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
 
-    filterset_fields = ["date"]
+    filterset_class = IncomeFilter
     ordering_fields = ["amount", "date"]
     search_fields = ["description"]
 
