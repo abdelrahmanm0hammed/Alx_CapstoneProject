@@ -5,6 +5,7 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter, SearchFilter
+from .filters import ExpenseFilter
 
 
 
@@ -13,8 +14,9 @@ class ExpenseListCreatView(generics.ListCreateAPIView):
     permission_classes=[IsAuthenticatedOrReadOnly]
 
     filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
+    filterset_class = ExpenseFilter
 
-    filterset_fields = ["category", "date"]
+    
     ordering_fields = ["amount", "date"]
     search_fields = ["description"]
 
