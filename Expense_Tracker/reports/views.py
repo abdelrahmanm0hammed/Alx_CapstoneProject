@@ -7,7 +7,7 @@ from incomes.models import Income
 import csv
 from django.http import HttpResponse
 from django.db.models.functions import ExtractMonth
-
+from django.utils import timezone
 
 class MonthlyReportView(APIView):
     permission_classes = [IsAuthenticated]
@@ -139,5 +139,58 @@ class YearlyReportView(APIView):
             "year": year,
             "monthly_data":monthly_data
         })
+    
+
 class DashboardSummaryView(APIView):
-    pass
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request):
+        user = request.user
+
+        # get current year and month
+        current_year = timezone.now().year
+        current_month = timezone.now().month
+
+
+
+        #current month income
+        current_month_income = (
+            Income.objects.filter(user=user, date__year=current_year, date__month=current_month)
+            .aggregate(total=Sum("amount"))["total"] or 0
+        )
+
+        #current month expense
+        current_month_expense = (
+            Expense.objects.filter(user=user, date__year=current_year, date__month=current_month)
+            .aggregate(total=Sum("amount"))["total"] or 0
+        )
+        #all-time income
+        total_income_all_time = (
+            Income.objects.filter(user=user).aggregate(total=Sum("amount"))["total"] or 0
+        )
+
+        #all-time expense
+        total_expense_all_time = (
+            Expense.objects.filter(user=user).aggregate(total=Sum("amount"))["total"] or 0
+        )
+
+        #highest expense category
+        highest_category = (
+            Expense.objects.filter(user=user).values("category").annotate(total=Sum("amount")) 
+            .order_by("-total").first()
+            #values() :group expenses by category
+        )
+        highest_expense_category = (
+            highest_category["category"] if highest_category else None
+        )
+        #return response
+        return Response({
+            "current_month_income":current_month_income,
+            "current_month_expense":current_month_expense,
+            "current_month_balance": current_month_income - current_month_expense,
+            "total_income_all_time": total_income_all_time,
+            "total_expense_all_time": total_expense_all_time,
+            "all_time_balance": total_income_all_time - total_expense_all_time,
+            "highest_expense_category": highest_expense_category
+        }
+        )
