@@ -139,3 +139,5 @@ class YearlyReportView(APIView):
             "year": year,
             "monthly_data":monthly_data
         })
+class DashboardSummaryView(APIView):
+    pass
