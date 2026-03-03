@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'incomes',
     'reports',
     'django_filters',
+    'rest_framework_simplejwt.token_blacklist',
 
 ]
 
