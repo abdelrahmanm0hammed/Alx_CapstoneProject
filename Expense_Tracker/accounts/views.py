@@ -2,8 +2,16 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib import auth
-# Create your views here.
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.tokens import RefreshToken
+
+
 User = get_user_model()
+
+
 
 def register(request):
     if request.method == "POST":
@@ -51,3 +59,23 @@ def login_view(request):
 def logout(request):
     auth.logout(request)
     return redirect("/")
+
+class LogoutView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+
+            return Response(
+                {"message": "Logout successful"},
+                status=status.HTTP_205_RESET_CONTENT
+
+            )
+        except Exception:
+            return Response(
+                {"error": "Invalid or expired token"},
+                status=status.HTTP.400_BAD_REQUEST
+            )
