@@ -5,5 +5,6 @@ urlpatterns = [
     path("monthly/", views.MonthlyReportView.as_view(), name="monthly-report"),
     path("monthly/export/",views.MonthlyReportCSVExportView.as_view(), name="monthly-report-export"),
     path("yearly/",views.YearlyReportView.as_view(), name='yearly-report'),
-    path("dashboard/",views.DashboardSummaryView.as_view(),name="dashboard-summary")
+    path("dashboard/",views.DashboardSummaryView.as_view(),name="dashboard-summary"),
+    path("category-summary",views.CategorySummaryView.as_view(),name="category-summary")
 ]
