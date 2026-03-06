@@ -194,3 +194,25 @@ class DashboardSummaryView(APIView):
             "highest_expense_category": highest_expense_category
         }
         )
+class CategorySummaryView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+
+        year = request.query_params.get("year")
+        month = request.query_params.get("month")
+
+        expenses = Expense.objects.filter(
+            user=request.user,
+            date__year=year,
+            date__month=month
+        )
+
+        summary = (
+            expenses
+            .values("category")
+            .annotate(total=Sum("amount"))
+            .order_by("-total")
+        )
+
+        return Response(summary)

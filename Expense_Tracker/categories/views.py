@@ -6,7 +6,6 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 
-
 class CategoryListCreateView(generics.ListCreateAPIView):
     
     serializer_class=CategorySerializer
@@ -24,3 +23,4 @@ class CategoryRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return Category.objects.filter(user=self.request.user)
+    
