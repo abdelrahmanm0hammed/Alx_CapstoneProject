@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'reports',
     'django_filters',
     'rest_framework_simplejwt.token_blacklist',
+    "drf_spectacular"
+
 
 ]
 
@@ -146,5 +148,6 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
         "rest_framework.authentication.SessionAuthentication",
     ),
+     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 
 }

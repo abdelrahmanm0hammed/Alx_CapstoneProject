@@ -77,5 +77,5 @@ class LogoutView(APIView):
         except Exception:
             return Response(
                 {"error": "Invalid or expired token"},
-                status=status.HTTP.400_BAD_REQUEST
+                status=status.HTTP_400_BAD_REQUEST
             )
