@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'reports',
     'django_filters',
     'rest_framework_simplejwt.token_blacklist',
-    "drf_spectacular"
+    "drf_spectacular",
 
 
 ]
