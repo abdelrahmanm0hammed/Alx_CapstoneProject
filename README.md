@@ -199,13 +199,7 @@ The documentation interface allows developers to:
 ---
 ## Screenshots
 
-### Swagger API Documentation
 
-![Swagger UI](docs/swagger.png)
-
-### Expense API Example
-
-![API Example](docs/api-example.png)
 
 # Authentication
 
