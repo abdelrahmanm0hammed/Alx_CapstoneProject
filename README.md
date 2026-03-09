@@ -2,353 +2,530 @@
 
 A backend API for managing personal expenses and financial records.
 
-Overview
+---
 
-The Expense Tracker API allows users to securely track their expenses, organize them into categories, and generate financial reports.
+# Overview
+
+The **Expense Tracker API** allows users to securely track their expenses, organize them into categories, and generate financial reports.
 
 The system supports:
 
-Session-based authentication for web users
+- **Session-based authentication** for web users
+- **JWT authentication** for API clients
 
-JWT authentication for API clients
+This project was developed as part of a **Capstone Project** using modern backend technologies.
 
-This project was developed as part of a Capstone Project using modern backend technologies.
+---
 
-Features
-- Authentication
+# Features
 
-User registration
+## 1. Authentication
 
-User login and logout
+- User registration
+- User login and logout
+- JWT authentication
+- Token refresh
+- Token blacklisting (secure logout)
 
-JWT authentication
+---
 
-Token refresh
+## 2. Expense Management
 
-Token blacklisting (secure logout)
+- Create expenses
+- Update expenses
+- Delete expenses
+- View personal expenses
 
-Expense Management
+---
 
-Create expenses
+## 3. Categories
 
-Update expenses
+- Create categories
+- Update categories
+- Delete categories
+- Assign expenses to categories
 
-Delete expenses
+---
 
-View personal expenses
+## 4. Reports
 
-Categories
+- Monthly expense reports
+- Yearly grouped reports
 
-Create categories
+---
 
-Update categories
+## 5. API Features
 
-Delete categories
+- Filtering
+- Pagination
+- Secure user-specific data access
+- CSV export
+- Interactive API documentation
 
-Assign expenses to categories
+---
 
-Reports
+# Technology Stack
 
-Monthly expense reports
+| Technology | Purpose |
+|-----------|--------|
+| Python 3.14 | Programming language |
+| Django | Web framework |
+| Django REST Framework | API framework |
+| PostgreSQL | Database |
+| SimpleJWT | JWT authentication |
+| drf-spectacular | API documentation |
 
-Yearly grouped reports
+---
 
-API Features
+# Installation
 
-Filtering
+## 1. Clone the Repository
 
-Pagination
-
-Secure user-specific data access
-
-CSV export
-
-Interactive API documentation
-
-## Technology Stack
-
-Technology	Purpose
-Python 3.14	Programming language
-Django	Web framework
-Django REST Framework	API framework
-PostgreSQL	Database
-SimpleJWT	JWT authentication
-drf-spectacular	API documentation
-
-## Installation
-
-1 Clone the Repository
+```bash
 git clone https://github.com/abdelrahmanm0hammed/Alx_CapstoneProject
-2 Navigate to the Project Folder
+## 2. Navigate to the Project Folder
+
+```bash
 cd Expense_tracker
-3 Create Virtual Environment
+```
+
+---
+
+## 3. Create Virtual Environment
+
+```bash
 python -m venv venv
-4 Activate Virtual Environment
+```
 
-Windows
+---
 
+## 4. Activate Virtual Environment
+
+### Windows
+
+```bash
 venv\Scripts\activate
+```
 
-Linux / Mac
+### Linux / Mac
 
+```bash
 source venv/bin/activate
-5 Install Dependencies
+```
+
+---
+
+## 5. Install Dependencies
+
+```bash
 pip install -r requirements.txt
-6 Run Database Migrations
+```
+
+---
+
+## 6. Run Database Migrations
+
+```bash
 python manage.py migrate
-7 Create Admin User
+```
+
+---
+
+## 7. Create Admin User
+
+```bash
 python manage.py createsuperuser
-8 Start Development Server
+```
+
+---
+
+## 8. Start Development Server
+
+```bash
 python manage.py runserver
+```
 
 Server will start at:
 
+```
 http://127.0.0.1:8000
-API Documentation
+```
 
-Interactive Swagger documentation:
+---
 
+# API Documentation
+
+### Interactive Swagger Documentation
+
+```
 http://127.0.0.1:8000/api/docs/
+```
 
-OpenAPI schema:
+### OpenAPI Schema
 
+```
 http://127.0.0.1:8000/api/schema/
+```
 
-This interface allows developers to:
+The documentation interface allows developers to:
 
-Explore endpoints
+* Explore endpoints
+* Test API requests
+* View request and response formats
 
-Test requests
+---
 
-View request and response formats
+# Authentication
 
-Authentication
+The API uses **JWT authentication** for secure access.
 
-The API uses JWT authentication for secure access.
+---
 
-Obtain Access Token
+## Obtain Access Token
 
-Endpoint
+### Endpoint
 
+```
 POST /api/token/
+```
 
-Request
+### Request
 
+```json
 {
   "username": "your_username",
   "password": "your_password"
 }
+```
 
-Response
+### Response
 
+```json
 {
   "access": "ACCESS_TOKEN",
   "refresh": "REFRESH_TOKEN"
 }
+```
 
 Use the access token in authenticated requests:
 
+```
 Authorization: Bearer ACCESS_TOKEN
-Refresh Access Token
+```
+
+---
+
+## Refresh Access Token
+
+### Endpoint
+
+```
 POST /api/token/refresh/
+```
 
-Request:
+### Request
 
+```json
 {
   "refresh": "REFRESH_TOKEN"
 }
-Logout (Blacklist Refresh Token)
+```
+
+---
+
+## Logout (Blacklist Refresh Token)
+
+### Endpoint
+
+```
 POST /api/logout/
+```
 
-Request:
+### Request
 
+```json
 {
   "refresh": "REFRESH_TOKEN"
 }
-API Endpoints
-Authentication
-Method	Endpoint	Description
-POST	/api/token/	Obtain JWT tokens
-POST	/api/token/refresh/	Refresh access token
-POST	/api/logout/	Logout and blacklist refresh token
-User Registration (HTML Form)
+```
 
-Users can register via the registration page:
+---
 
+# API Endpoints
+
+## Authentication Endpoints
+
+| Method | Endpoint            | Description                        |
+| ------ | ------------------- | ---------------------------------- |
+| POST   | /api/token/         | Obtain JWT tokens                  |
+| POST   | /api/token/refresh/ | Refresh access token               |
+| POST   | /api/logout/        | Logout and blacklist refresh token |
+
+---
+
+# User Registration (HTML Form)
+
+Users can register using the registration page:
+
+```
 /accounts/register/
-Required Fields
+```
 
-First Name
+### Required Fields
 
-Last Name
+* First Name
+* Last Name
+* Username
+* Email
+* Password
+* Confirm Password
 
-Username
+### Behavior
 
-Email
+**Successful Registration**
 
-Password
+* User is redirected to the login page.
 
-Confirm Password
+**Error Handling**
 
-Behavior
+* Username already exists
+* Email already exists
+* Passwords do not match
 
-Successful registration:
+---
 
-Redirects user to login page
+# Login
 
-Error handling:
+### Endpoint
 
-Username already exists
-
-Email already exists
-
-Passwords do not match
-
-Login
+```
 /accounts/login/
-Input
+```
 
-Username
+### Input
 
-Password
+* Username
+* Password
 
-Behavior
+### Behavior
 
-Successful login:
+**Successful Login**
 
-Redirects user to home page
+* User is redirected to the home page.
 
-Invalid credentials:
+**Invalid Credentials**
 
-Displays error message
+* Displays an error message.
 
-Logout
+---
+
+# Logout
+
+### Endpoint
+
+```
 /accounts/logout/
-Behavior
+```
 
-Logs the user out
+### Behavior
 
-Redirects to the home page
+* Logs the user out
+* Redirects to the home page
 
-Categories API
-Create Category
+---
+
+# Categories API
+
+## Create Category
+
+### Endpoint
+
+```
 POST /categories/
+```
 
-Example request:
+### Example Request
 
+```json
 {
   "name": "Electronics",
   "description": "Devices that work using electricity"
 }
-Behavior
+```
 
-Logged-in user is automatically assigned
+### Behavior
 
-Creation date is automatically recorded
+* Logged-in user is automatically assigned
+* Creation date is automatically recorded
 
-Expenses API
-Create Expense
+---
+
+# Expenses API
+
+## Create Expense
+
+### Endpoint
+
+```
 POST /expenses/
+```
 
-Example request:
+### Example Request
 
+```json
 {
   "category": 1,
   "amount": 100,
   "description": "Mobile phone",
   "date": "2026-03-07"
 }
-Retrieve Expenses
+```
+
+---
+
+## Retrieve Expenses
+
+### Endpoint
+
+```
 GET /expenses/
+```
 
-Supported features:
+### Supported Features
 
-Filtering
+* Filtering
+* Pagination
+* Ordering
 
-Pagination
+### Example Query
 
-Ordering
-
-Example query:
-
+```
 /expenses/?category=1
-Reports
-Monthly Report
+```
+
+---
+
+# Reports
+
+## Monthly Report
+
+### Endpoint
+
+```
 GET /reports/monthly/?year=2026&month=3
+```
 
-Returns the total expenses for a specific month.
+Returns the **total expenses for a specific month**.
 
-Yearly Report
+---
+
+## Yearly Report
+
+### Endpoint
+
+```
 GET /reports/yearly/?year=2026
+```
 
-Returns expense totals grouped by month.
+Returns **expense totals grouped by month**.
 
-Example Usage (Step-by-Step)
-Step 1 — Register a User
+---
+
+# Example Usage (Step-by-Step)
+
+## Step 1 — Register a User
 
 Visit:
 
+```
 http://127.0.0.1:8000/accounts/register/
+```
 
-Example input:
+Example Input:
 
-First Name: John
-Last Name: Doe
-Username: abood
-Email: myemail@gmail.com
-Password: 123456abdo
+* First Name: John
+* Last Name: Doe
+* Username: abood
+* Email: [myemail@gmail.com](mailto:myemail@gmail.com)
+* Password: 123456abdo
 
 After submission:
 
-User is redirected to login page.
+* User is redirected to the login page.
 
-Step 2 — Login
+---
+
+## Step 2 — Login
 
 Visit:
 
+```
 http://127.0.0.1:8000/accounts/login/
+```
 
 Credentials:
 
-Username: abood
-Password: 123456abdo
+* Username: abood
+* Password: 123456abdo
 
-User will be redirected to the home page.
+Result:
 
-Step 3 — Create a Category
+* User is redirected to the home page.
+
+---
+
+## Step 3 — Create a Category
 
 Visit:
 
+```
 http://127.0.0.1:8000/categories/
+```
 
 Example:
 
-Name: Electronics
-Description: Devices powered by electricity
+* Name: Electronics
+* Description: Devices powered by electricity
 
-User is automatically assigned.
+The user is automatically assigned.
 
-Step 4 — Create an Expense
+---
+
+## Step 4 — Create an Expense
 
 Visit:
 
+```
 http://127.0.0.1:8000/expenses/
+```
 
 Example:
 
-Category: Electronics
-Amount: 100
-Description: Mobile phone
-Date: Today
-Step 5 — Logout
+* Category: Electronics
+* Amount: 100
+* Description: Mobile phone
+* Date: Today
+
+---
+
+## Step 5 — Logout
 
 Visit:
 
+```
 http://127.0.0.1:8000/accounts/logout/
+```
 
-User is logged out and redirected to home page.
+Result:
 
-Project Structure
+* User is logged out
+* Redirected to the home page
+
+---
+
+# Project Structure
+
+```
 Expense_Tracker
 │
 ├── users
@@ -358,16 +535,21 @@ Expense_Tracker
 ├── manage.py
 ├── requirements.txt
 └── README.md
-Security
+```
+
+---
+
+# Security
 
 The application ensures:
 
-User-specific data isolation
+* User-specific data isolation
+* Secure JWT authentication
+* Refresh token invalidation on logout
 
-Secure JWT authentication
+---
 
-Refresh token invalidation on logout
+# License
 
-License
+This project was created as part of a **Capstone Project**.
 
-This project was created as part of a Capstone Project.
