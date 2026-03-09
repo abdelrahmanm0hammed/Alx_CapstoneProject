@@ -97,6 +97,19 @@ This project was developed as part of a **Capstone Project** using modern backen
 | drf-spectacular | API documentation |
 
 ---
+# System Architecture
+
+```mermaid
+graph TD
+
+User --> Browser
+Browser --> DjangoApp
+DjangoApp --> DRF_API
+DRF_API --> PostgreSQL
+
+DjangoApp --> Authentication
+Authentication --> JWT
+JWT --> ProtectedEndpoints
 
 # Installation
 
