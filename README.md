@@ -1,4 +1,11 @@
 # Expense Tracker API
+# Expense Tracker API
+
+![Python](https://img.shields.io/badge/Python-3.14-blue)
+![Django](https://img.shields.io/badge/Django-Framework-green)
+![DRF](https://img.shields.io/badge/Django%20REST-API-red)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
 A backend API for managing personal expenses and financial records.
 
