@@ -1,4 +1,4 @@
-# Expense Tracker API
+
 # Expense Tracker API
 
 ![Python](https://img.shields.io/badge/Python-3.14-blue)
