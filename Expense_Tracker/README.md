@@ -1,106 +1,135 @@
-Expense Tracker API
+## Expense Tracker API
+
+A backend API for managing personal expenses and financial records.
+
 Overview
 
-Expense Tracker API is a backend system for managing personal finances.
-It allows users to securely track expenses, organize them into categories, and generate financial reports.
+The Expense Tracker API allows users to securely track their expenses, organize them into categories, and generate financial reports.
 
-The system supports both session-based authentication for web users and JWT authentication for API clients.
+The system supports:
 
-This project was built using Django, Django REST Framework, and PostgreSQL.
+Session-based authentication for web users
+
+JWT authentication for API clients
+
+This project was developed as part of a Capstone Project using modern backend technologies.
 
 Features
+Authentication
 
-User authentication (Register, Login, Logout)
+User registration
 
-JWT authentication for API access
+User login and logout
 
-CRUD operations for expenses
+JWT authentication
 
-CRUD operations for categories
+Token refresh
+
+Token blacklisting (secure logout)
+
+Expense Management
+
+Create expenses
+
+Update expenses
+
+Delete expenses
+
+View personal expenses
+
+Categories
+
+Create categories
+
+Update categories
+
+Delete categories
+
+Assign expenses to categories
+
+Reports
+
+Monthly expense reports
+
+Yearly grouped reports
+
+API Features
+
+Filtering
+
+Pagination
 
 Secure user-specific data access
 
-Monthly and yearly expense reports
-
-Filtering and pagination
-
 CSV export
 
-Interactive API documentation (Swagger)
+Interactive API documentation
 
 Technology Stack
-
-Python 3.14
-
-Django
-
-Django REST Framework
-
-PostgreSQL
-
-SimpleJWT
-
-drf-spectacular (API documentation)
-
+Technology	Purpose
+Python 3.14	Programming language
+Django	Web framework
+Django REST Framework	API framework
+PostgreSQL	Database
+SimpleJWT	JWT authentication
+drf-spectacular	API documentation
 Installation
-
-Clone the repository
-
+1 Clone the Repository
 git clone https://github.com/abdelrahmanm0hammed/Alx_CapstoneProject
-
-Navigate to the project folder
-
+2 Navigate to the Project Folder
 cd Expense_tracker
-
-Create a virtual environment
-
+3 Create Virtual Environment
 python -m venv venv
+4 Activate Virtual Environment
 
-Activate the virtual environment
-
-Windows:
+Windows
 
 venv\Scripts\activate
 
-Install dependencies
+Linux / Mac
 
+source venv/bin/activate
+5 Install Dependencies
 pip install -r requirements.txt
-
-Run database migrations
-
+6 Run Database Migrations
 python manage.py migrate
-
-Create a superuser
-
+7 Create Admin User
 python manage.py createsuperuser
-
-Run the development server
-
+8 Start Development Server
 python manage.py runserver
 
-The project will be available at:
+Server will start at:
 
 http://127.0.0.1:8000
 API Documentation
 
-Interactive API documentation is available at:
+Interactive Swagger documentation:
 
 http://127.0.0.1:8000/api/docs/
 
 OpenAPI schema:
 
 http://127.0.0.1:8000/api/schema/
+
+This interface allows developers to:
+
+Explore endpoints
+
+Test requests
+
+View request and response formats
+
 Authentication
 
-The API supports JWT authentication.
+The API uses JWT authentication for secure access.
 
-Obtain JWT Tokens
+Obtain Access Token
 
 Endpoint
 
 POST /api/token/
 
-Request body
+Request
 
 {
   "username": "your_username",
@@ -110,13 +139,29 @@ Request body
 Response
 
 {
-  "access": "access_token_here",
-  "refresh": "refresh_token_here"
+  "access": "ACCESS_TOKEN",
+  "refresh": "REFRESH_TOKEN"
 }
 
 Use the access token in authenticated requests:
 
 Authorization: Bearer ACCESS_TOKEN
+Refresh Access Token
+POST /api/token/refresh/
+
+Request:
+
+{
+  "refresh": "REFRESH_TOKEN"
+}
+Logout (Blacklist Refresh Token)
+POST /api/logout/
+
+Request:
+
+{
+  "refresh": "REFRESH_TOKEN"
+}
 API Endpoints
 Authentication
 Method	Endpoint	Description
@@ -124,11 +169,11 @@ POST	/api/token/	Obtain JWT tokens
 POST	/api/token/refresh/	Refresh access token
 POST	/api/logout/	Logout and blacklist refresh token
 User Registration (HTML Form)
-GET /accounts/register/
 
-Registers a new user.
+Users can register via the registration page:
 
-Required fields:
+/accounts/register/
+Required Fields
 
 First Name
 
@@ -142,48 +187,59 @@ Password
 
 Confirm Password
 
-Behavior:
+Behavior
 
-Redirects to login page after successful registration
+Successful registration:
 
-Displays error messages if:
+Redirects user to login page
 
-username already exists
+Error handling:
 
-email already exists
+Username already exists
 
-passwords do not match
+Email already exists
+
+Passwords do not match
 
 Login
-GET /accounts/login/
+/accounts/login/
+Input
 
-Login using username and password.
+Username
 
-Behavior:
+Password
 
-Redirects to home page on success
+Behavior
 
-Displays an error message if credentials are invalid
+Successful login:
+
+Redirects user to home page
+
+Invalid credentials:
+
+Displays error message
 
 Logout
-GET /accounts/logout/
+/accounts/logout/
+Behavior
 
-Logs the user out and redirects to the home page.
+Logs the user out
+
+Redirects to the home page
 
 Categories API
 Create Category
 POST /categories/
 
-Example request
+Example request:
 
 {
   "name": "Electronics",
   "description": "Devices that work using electricity"
 }
+Behavior
 
-Behavior:
-
-The logged-in user is automatically assigned as the category owner
+Logged-in user is automatically assigned
 
 Creation date is automatically recorded
 
@@ -191,7 +247,7 @@ Expenses API
 Create Expense
 POST /expenses/
 
-Example request
+Example request:
 
 {
   "category": 1,
@@ -202,22 +258,22 @@ Example request
 Retrieve Expenses
 GET /expenses/
 
-Supports:
+Supported features:
 
-filtering
+Filtering
 
-pagination
+Pagination
 
-ordering
+Ordering
 
-Example:
+Example query:
 
 /expenses/?category=1
 Reports
 Monthly Report
 GET /reports/monthly/?year=2026&month=3
 
-Returns total expenses for a specific month.
+Returns the total expenses for a specific month.
 
 Yearly Report
 GET /reports/yearly/?year=2026
@@ -225,7 +281,7 @@ GET /reports/yearly/?year=2026
 Returns expense totals grouped by month.
 
 Example Usage (Step-by-Step)
-1 Register a User
+Step 1 — Register a User
 
 Visit:
 
@@ -237,27 +293,26 @@ First Name: John
 Last Name: Doe
 Username: abood
 Email: myemail@gmail.com
-
 Password: 123456abdo
 
-Submit the form.
+After submission:
 
-The user will be redirected to the login page.
+User is redirected to login page.
 
-2 Login
+Step 2 — Login
 
 Visit:
 
 http://127.0.0.1:8000/accounts/login/
 
-Enter:
+Credentials:
 
 Username: abood
 Password: 123456abdo
 
-The user will be redirected to the home page.
+User will be redirected to the home page.
 
-3 Create a Category
+Step 3 — Create a Category
 
 Visit:
 
@@ -268,9 +323,9 @@ Example:
 Name: Electronics
 Description: Devices powered by electricity
 
-The logged-in user is automatically assigned.
+User is automatically assigned.
 
-4 Create an Expense
+Step 4 — Create an Expense
 
 Visit:
 
@@ -282,14 +337,13 @@ Category: Electronics
 Amount: 100
 Description: Mobile phone
 Date: Today
-
-5 Logout
+Step 5 — Logout
 
 Visit:
 
 http://127.0.0.1:8000/accounts/logout/
 
-The user will be logged out and redirected to the home page.
+User is logged out and redirected to home page.
 
 Project Structure
 Expense_Tracker
@@ -303,12 +357,14 @@ Expense_Tracker
 └── README.md
 Security
 
-User data is isolated per authenticated user
+The application ensures:
 
-JWT tokens protect API endpoints
+User-specific data isolation
 
-Refresh tokens can be blacklisted on logout
+Secure JWT authentication
+
+Refresh token invalidation on logout
 
 License
 
-This project was developed as part of a Capstone Project
+This project was created as part of a Capstone Project.
