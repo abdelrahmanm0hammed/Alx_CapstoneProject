@@ -65,7 +65,8 @@ CSV export
 
 Interactive API documentation
 
-Technology Stack
+# Technology Stack
+
 Technology	Purpose
 Python 3.14	Programming language
 Django	Web framework
@@ -73,7 +74,9 @@ Django REST Framework	API framework
 PostgreSQL	Database
 SimpleJWT	JWT authentication
 drf-spectacular	API documentation
-Installation
+
+# Installation
+
 1 Clone the Repository
 git clone https://github.com/abdelrahmanm0hammed/Alx_CapstoneProject
 2 Navigate to the Project Folder
