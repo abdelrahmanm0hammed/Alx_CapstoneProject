@@ -97,19 +97,8 @@ This project was developed as part of a **Capstone Project** using modern backen
 | drf-spectacular | API documentation |
 
 ---
-# System Architecture
 
-```mermaid
-graph TD
 
-User --> Browser
-Browser --> DjangoApp
-DjangoApp --> DRF_API
-DRF_API --> PostgreSQL
-
-DjangoApp --> Authentication
-Authentication --> JWT
-JWT --> ProtectedEndpoints
 
 # Installation
 
@@ -208,6 +197,15 @@ The documentation interface allows developers to:
 * View request and response formats
 
 ---
+## Screenshots
+
+### Swagger API Documentation
+
+![Swagger UI](docs/swagger.png)
+
+### Expense API Example
+
+![API Example](docs/api-example.png)
 
 # Authentication
 
