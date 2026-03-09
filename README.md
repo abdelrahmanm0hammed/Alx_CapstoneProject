@@ -15,7 +15,7 @@ JWT authentication for API clients
 This project was developed as part of a Capstone Project using modern backend technologies.
 
 Features
-Authentication
+- Authentication
 
 User registration
 
