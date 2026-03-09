@@ -1,4 +1,4 @@
-## Expense Tracker API
+# Expense Tracker API
 
 A backend API for managing personal expenses and financial records.
 
@@ -65,7 +65,7 @@ CSV export
 
 Interactive API documentation
 
-# Technology Stack
+## Technology Stack
 
 Technology	Purpose
 Python 3.14	Programming language
@@ -75,7 +75,7 @@ PostgreSQL	Database
 SimpleJWT	JWT authentication
 drf-spectacular	API documentation
 
-# Installation
+## Installation
 
 1 Clone the Repository
 git clone https://github.com/abdelrahmanm0hammed/Alx_CapstoneProject
