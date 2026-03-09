@@ -23,6 +23,20 @@ The system supports:
 This project was developed as part of a **Capstone Project** using modern backend technologies.
 
 ---
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Technology Stack](#technology-stack)
+- [Installation](#installation)
+- [API Documentation](#api-documentation)
+- [Authentication](#authentication)
+- [API Endpoints](#api-endpoints)
+- [Reports](#reports)
+- [Example Usage](#example-usage-step-by-step)
+- [Project Structure](#project-structure)
+- [Security](#security)
+- [License](#license)
 
 # Features
 
